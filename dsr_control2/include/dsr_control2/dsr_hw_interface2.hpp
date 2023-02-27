@@ -47,15 +47,24 @@
 #include <array>
 #include <algorithm>  // std::copy
 
-#ifdef _OLD_ROS2_CONTROL_
-    #include <hardware_interface/joint_command_handle.hpp>
-    #include <hardware_interface/joint_state_handle.hpp>
-#else 
-    #include "hardware_interface/joint_handle.hpp"
-#endif
+// #ifdef _OLD_ROS2_CONTROL_
+//     #include <hardware_interface/joint_command_handle.hpp>
+//     #include <hardware_interface/joint_state_handle.hpp>
+// #else 
+//     #include "hardware_interface/joint_handle.hpp"
+// #endif
 
-#include <hardware_interface/robot_hardware.hpp>
+// #include <hardware_interface/robot_hardware.hpp> // 사용 안함
 #include <hardware_interface/types/hardware_interface_return_values.hpp>  //add
+
+//추가
+#include <hardware_interface/types/hardware_interface_type_values.hpp>
+#include <hardware_interface/types/hardware_interface_status_values.hpp>
+#include <hardware_interface/handle.hpp>
+
+
+
+
 
 #include "std_msgs/msg/float64_multi_array.hpp"
 #include "std_msgs/msg/string.hpp"
@@ -496,7 +505,8 @@ using namespace DRAFramework;
 
 namespace dsr_control2{
 
-    class DRHWInterface : public hardware_interface::RobotHardware
+    class DRHWInterface 
+    // : public hardware_interface::RobotHardware
     {
     public:
 	    DRHWInterface(rclcpp::Node::SharedPtr& nh);
@@ -706,6 +716,8 @@ namespace dsr_control2{
 //ROS2        hardware_interface::JointStateInterface jnt_state_interface;
 //ROS2        hardware_interface::PositionJointInterface jnt_pos_interface;
 //ROS2        hardware_interface::VelocityJointInterface velocity_joint_interface_;
+/*
+hardware_interface/robot_hardware.hpp 사용하지 않아 주석 처리
 #ifdef _OLD_ROS2_CONTROL_
         std::vector<hardware_interface::JointStateHandle> joint_state_handles_;
         std::vector<hardware_interface::JointCommandHandle> joint_command_handles_;
@@ -720,6 +732,7 @@ namespace dsr_control2{
         std::vector<hardware_interface::OperationModeHandle> joint_opmodes_;
         std::vector<hardware_interface::OperationModeHandle> joint_opmodehandles_;
 #endif
+*/
         std::array<float, NUM_JOINT> m_fCmd_;
         bool m_bCommand_;
         
