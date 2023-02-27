@@ -12,14 +12,7 @@ import signal
 from dsr_msgs2.msg import *
 
 sys.dont_write_bytecode = True
-sys.path.append(
-    os.path.abspath(
-        os.path.join(
-            os.path.dirname(__file__), "../../../install/common2/bin/common2/imp"
-        )
-    )
-)  # get import pass : DSR_ROBOT2.py
-
+sys.path.append("./install/common2/bin/common2/imp")  # get import pass : DSR_ROBOT2.py
 
 # --------------------------------------------------------
 import DR_init
