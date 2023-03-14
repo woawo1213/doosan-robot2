@@ -290,7 +290,7 @@ namespace DRAFramework
         void PrintFParam(float* printArr, int iSize, string strFunc);
         void PrintUCParam(unsigned char* printArr, int iSize, string strFunc);
 #ifdef __cplusplus
-    };
+    }
 #endif
 
 #ifdef __cplusplus
