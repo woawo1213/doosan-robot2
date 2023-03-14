@@ -394,7 +394,7 @@ namespace DRAFramework
         DRFL_API bool _system_shut_down(LPROBOTCONTROL pCtrl);
 
 #ifdef __cplusplus
-    };
+    }
 #endif
 
 #ifdef __cplusplus
@@ -404,7 +404,7 @@ namespace DRAFramework
         // connection
         //for ROS org bool OpenConnection(string strIpAddr = "192.168.137.100") { return _OpenConnection(_rbtCtrl, strIpAddr.c_str()); };
         bool open_connection(string strIpAddr = "192.168.137.100", unsigned int usPort= 12345) { return _open_connection(_rbtCtrl, strIpAddr.c_str(), usPort); };
-        bool close_connection() { _close_connection(_rbtCtrl); }
+        bool close_connection() { _close_connection(_rbtCtrl); };
 
 
         ////////////////////////////////////////////////////////////////////////////
@@ -519,7 +519,7 @@ namespace DRAFramework
         DRL_PROGRAM_STATE get_program_state() { return _get_program_state(_rbtCtrl); };
 
         // set safe-stop reset type
-        bool set_safe_stop_reset_type(SAFE_STOP_RESET_TYPE eResetType = SAFE_STOP_RESET_TYPE_DEFAULT) { _set_safe_stop_reset_type(_rbtCtrl, eResetType); }
+        bool set_safe_stop_reset_type(SAFE_STOP_RESET_TYPE eResetType = SAFE_STOP_RESET_TYPE_DEFAULT) { _set_safe_stop_reset_type(_rbtCtrl, eResetType); };
 
         // get roobot system alarm
         LPLOG_ALARM get_last_alarm() { return _get_last_alarm(_rbtCtrl); };
