@@ -1,11 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 project(dsr_control2)
 
-# Default to C99
-if(NOT CMAKE_C_STANDARD)
-  set(CMAKE_C_STANDARD 99)
-endif()
-
 # Default to C++14
 if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 14)
@@ -14,11 +9,6 @@ endif()
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic -fpermissive)
 endif()
-
-#??? find_package(ament_cmake REQUIRED COMPONENTS
-#???   dsr_msgs2
-#???   rclcpp
-#??? )
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
@@ -29,13 +19,7 @@ find_package(dsr_msgs2 REQUIRED)
 find_package(controller_manager REQUIRED)
 find_package(hardware_interface REQUIRED)
 find_package(moveit_msgs REQUIRED)
-
-
-#??? catkin_package(
-#???   INCLUDE_DIRS include
-#???   CATKIN_DEPENDS dsr_msgs2 roscpp
-#??? )
-
+find_package(gazebo_ros_pkgs)
 
 SET( COMMON_INC_FILES
   ../common2/include
@@ -69,7 +53,7 @@ endif()
 
 add_executable(dsr_control_node2 ${SRC_FILES})
 #??? add_dependencies(dsr_control_node2 ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-ament_target_dependencies(dsr_control_node2 rclcpp std_msgs sensor_msgs dsr_msgs2 controller_manager hardware_interface moveit_msgs)
+ament_target_dependencies(dsr_control_node2 rclcpp std_msgs sensor_msgs dsr_msgs2 controller_manager moveit_msgs hardware_interface gazebo_ros_pkgs)
 
 #target_link_libraries(dsr_control_node2 ${catkin_LIBRARIES})
 target_link_libraries(dsr_control_node2 boost_system boost_thread)
@@ -93,11 +77,19 @@ install(DIRECTORY config
   DESTINATION share/${PROJECT_NAME}
 )
 
-ament_export_include_directories(include)
-ament_export_dependencies(std_msgs)
-ament_export_dependencies(sensor_msgs)
-ament_export_dependencies(dsr_msgs2)
-ament_export_dependencies(controller_manager)
-ament_export_dependencies(moveit_msgs)
-ament_export_dependencies(hardware_interface)
+ament_export_include_directories(
+  include
+)
+
+ament_export_dependencies(
+  rclcpp
+  std_msgs
+  sensor_msgs
+  dsr_msgs2
+  controller_manager
+  moveit_msgs
+  hardware_interface
+  gazebo_ros_pkgs
+)
+
 ament_package()
